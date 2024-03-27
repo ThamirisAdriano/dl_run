@@ -2,19 +2,23 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-X = torch.tensor([[5.0, 5.5], [10.0, 5.2], [21.1, 5.0], [42.2, 4.9]], dtype=torch.float32)
-y = torch.tensor([[27.5], [52.0], [105.5], [206.6]], dtype=torch.float32)
+# Atualizando os dados para refletir apenas a distância (Km) como entrada
+X = torch.tensor([[5.0], [10.0], [10.0], [5.0], [10.0],
+                  [5.0], [10.0], [10.0], [5.0], [10.0],
+                  [5.0], [10.0], [10.0], [5.0], [10.0],
+                  [5.0], [10.0], [10.0], [5.0], [10.0]], dtype=torch.float32)  
+
+y = torch.tensor([[30.5], [63.0], [67.0], [29.0], [62.0],
+                  [30.5], [63.0], [67.0], [29.0], [62.0],
+                  [30.5], [63.0], [67.0], [29.0], [62.0],
+                  [30.5], [63.0], [67.0], [29.0], [62.0]], dtype=torch.float32)  
+
 
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
-        self.fc1 = nn.Linear(2, 4)
-        self.fc2 = nn.Linear(4, 1)
-
-    def forward(self, x):
-        x = torch.relu(self.fc1(x))
-        x = self.fc2(x)
-        return x
+        self.fc1 = nn.Linear(1, 5)  
+        self.fc2 = nn.Linear(5, 1)
 
 model = Net()
 
